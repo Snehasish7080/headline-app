@@ -3,6 +3,7 @@ export const Colors = {
   btnBackground: '#E3EDF7',
   textPrimary: '#31456A',
   labelText: '#334669',
+  white: '#FFFFFF',
 };
 
 export const FontFamily = {
