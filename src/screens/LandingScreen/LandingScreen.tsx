@@ -1,6 +1,6 @@
 import {Canvas, Text, useFont} from '@shopify/react-native-skia';
 import React from 'react';
-import {Dimensions, KeyboardAvoidingView, View} from 'react-native';
+import {Dimensions, KeyboardAvoidingView, View, Image} from 'react-native';
 import AppBackground from '../../atoms/AppBackground/AppBackground';
 import AppButton from '../../atoms/AppButton/AppButton';
 import AppInputBox from '../../atoms/AppInputBox/AppInputBox';
@@ -24,6 +24,27 @@ const LandingScreen: React.FC<UnAuthenticatedNavProps<'LandingScreen'>> = ({
         <AppText lineHeight={28} style={styles.title}>
           Welcome back {`\n`}to Headline
         </AppText>
+        <View style={styles.imageContainer}>
+          <Image
+            source={require('../../assets/images/headline.jpg')}
+            style={styles.mainImage}
+          />
+          <View style={styles.supportingImageContainer}>
+            <Image
+              source={require('../../assets/images/news.jpg')}
+              style={[
+                styles.supportingImage,
+                {
+                  marginBottom: 5,
+                },
+              ]}
+            />
+            <Image
+              source={require('../../assets/images/talking.jpg')}
+              style={styles.supportingImage}
+            />
+          </View>
+        </View>
         <View style={styles.inputContainer}>
           <AppInputBox
             width={horizontalScale(327)}

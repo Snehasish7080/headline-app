@@ -20,9 +20,30 @@ export const styles = StyleSheet.create({
   },
   canvas: {width: '100%', flex: 1},
   inputContainer: {
-    flex: 1,
     paddingHorizontal: 24,
     paddingVertical: 34,
     justifyContent: 'flex-end',
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingTop: 20,
+    paddingBottom: 40,
+  },
+  mainImage: {
+    width: 202,
+    height: 202,
+    borderRadius: 10,
+  },
+  supportingImageContainer: {
+    flexDirection: 'column',
+    marginLeft: 5,
+  },
+  supportingImage: {
+    width: 130,
+    height: 100,
+    borderRadius: 10,
+    resizeMode: 'contain',
   },
 });
