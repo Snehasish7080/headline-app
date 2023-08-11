@@ -8,7 +8,7 @@ import AppText from '../AppText/AppText';
 type AppInputBoxProps = TextInputProps & {
   width: number;
   height: number;
-  label: string;
+  label?: string;
 };
 const AppInputBox: React.FC<AppInputBoxProps> = ({
   width,
@@ -18,9 +18,11 @@ const AppInputBox: React.FC<AppInputBoxProps> = ({
 }) => {
   return (
     <View style={styles.labelContainer}>
-      <AppText lineHeight={16} style={styles.label}>
-        {label}
-      </AppText>
+      {Boolean(label) && (
+        <AppText lineHeight={16} style={styles.label}>
+          {label}
+        </AppText>
+      )}
       <View
         style={[
           styles.container,

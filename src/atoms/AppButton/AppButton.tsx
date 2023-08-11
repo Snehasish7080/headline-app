@@ -65,8 +65,8 @@ const AppButton: React.FC<AppButtonProps> = ({
               style="stroke"
               strokeWidth={1}
             />
-            <Shadow dx={4} dy={2} blur={16} color="rgba(136, 165, 191, 0.48)" />
-            <Shadow dx={-4} dy={-2} blur={16} color="rgba(255, 255, 255, 1)" />
+            <Shadow dx={4} dy={2} blur={5} color="rgba(136, 165, 191, 0.48)" />
+            <Shadow dx={-4} dy={-2} blur={5} color="rgba(255, 255, 255, 1)" />
           </RoundedRect>
           <Text
             x={(width - (size || 0)) / 2 + x}

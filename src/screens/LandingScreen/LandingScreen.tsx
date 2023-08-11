@@ -68,7 +68,7 @@ const LandingScreen: React.FC<UnAuthenticatedNavProps<'LandingScreen'>> = ({
           height={60}
           x={24}
           y={15}
-          fontSize={20}
+          fontSize={18}
           btnStyle={styles.btn}
           onPress={() => {
             navigation.navigate('OtpScreen');
