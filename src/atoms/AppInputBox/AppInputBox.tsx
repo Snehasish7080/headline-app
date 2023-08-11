@@ -1,21 +1,37 @@
-import {View, Text, TextInput, TextInputProps} from 'react-native';
+import {
+  Canvas,
+  Group,
+  Paint,
+  Path,
+  rect,
+  RoundedRect,
+  rrect,
+  Shadow,
+  Skia,
+} from '@shopify/react-native-skia';
 import React from 'react';
-import {styles} from './AppInputBoxStyles';
-import {Canvas, Paint, RoundedRect, Shadow} from '@shopify/react-native-skia';
+import {TextInput, TextInputProps, View} from 'react-native';
 import {Colors, FontFamily} from '../../utils/theme';
 import AppText from '../AppText/AppText';
+import {styles} from './AppInputBoxStyles';
 
 type AppInputBoxProps = TextInputProps & {
   width: number;
   height: number;
   label?: string;
+  isActive?: boolean;
+  activeColor?: string;
 };
 const AppInputBox: React.FC<AppInputBoxProps> = ({
   width,
   height = 58,
   label,
+  isActive = false,
+  activeColor = Colors.primary,
   ...props
 }) => {
+  const stroke = Skia.Path.Make();
+  stroke.addRRect(rrect(rect(1, 1, width - 1.5, height - 1.5), 16, 16));
   return (
     <View style={styles.labelContainer}>
       {Boolean(label) && (
@@ -40,6 +56,7 @@ const AppInputBox: React.FC<AppInputBoxProps> = ({
             r={16}
             color={Colors.btnBackground}>
             <Paint color={Colors.primary} style="stroke" strokeWidth={1} />
+
             <Shadow dx={-3} dy={-3} blur={7} color="#FFFFFF" inner />
             <Shadow
               dx={2}
@@ -49,6 +66,17 @@ const AppInputBox: React.FC<AppInputBoxProps> = ({
               inner
             />
           </RoundedRect>
+          {isActive && (
+            <Group>
+              <Path
+                path={stroke}
+                style="stroke"
+                strokeWidth={1}
+                strokeCap="round"
+                color={activeColor}
+              />
+            </Group>
+          )}
         </Canvas>
         <TextInput
           {...props}
