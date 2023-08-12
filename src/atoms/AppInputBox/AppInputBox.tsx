@@ -21,6 +21,7 @@ type AppInputBoxProps = TextInputProps & {
   label?: string;
   isActive?: boolean;
   activeColor?: string;
+  strokeWidth?: number;
 };
 const AppInputBox: React.FC<AppInputBoxProps> = ({
   width,
@@ -28,6 +29,7 @@ const AppInputBox: React.FC<AppInputBoxProps> = ({
   label,
   isActive = false,
   activeColor = Colors.primary,
+  strokeWidth = 1,
   ...props
 }) => {
   const stroke = Skia.Path.Make();
@@ -71,7 +73,7 @@ const AppInputBox: React.FC<AppInputBoxProps> = ({
               <Path
                 path={stroke}
                 style="stroke"
-                strokeWidth={1}
+                strokeWidth={strokeWidth}
                 strokeCap="round"
                 color={activeColor}
               />

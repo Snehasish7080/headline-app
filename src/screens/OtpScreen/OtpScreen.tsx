@@ -3,28 +3,31 @@ import React, {useEffect, useRef, useState} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
-  Text,
   TouchableOpacity,
   useWindowDimensions,
   View,
 } from 'react-native';
+import AppButton from '../../atoms/AppButton/AppButton';
 import {UnAuthenticatedNavProps} from '../../navigation/UnAuthenticatedNavigation/UnAuthenticatedNavigationTypes';
 import {horizontalScale} from '../../utils/scale';
-import AppButton from '../../atoms/AppButton/AppButton';
 
-import {styles} from './OtpScreenStyles';
-import AppText from '../../atoms/AppText/AppText';
-import AppInputBox from '../../atoms/AppInputBox/AppInputBox';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 import {TextInput} from 'react-native-gesture-handler';
+import AppInputBox from '../../atoms/AppInputBox/AppInputBox';
+import AppText from '../../atoms/AppText/AppText';
+import {AuthenticatedRouteList} from '../../navigation/AuthenticatedNavigation/AuthenticatedNavigationTypes';
 import {Colors} from '../../utils/theme';
+import {styles} from './OtpScreenStyles';
+import {ParentRouteList} from '../../navigation/ParentNavigation/ParentNavigationTypes';
 
-const OtpScreen: React.FC<UnAuthenticatedNavProps<'OtpScreen'>> = ({
-  navigation,
-}) => {
+const OtpScreen: React.FC<UnAuthenticatedNavProps<'OtpScreen'>> = () => {
   const {width, height} = useWindowDimensions();
   const ref = useRef<TextInput>(null);
   const [otp, setOtp] = useState('');
   const [isActive, setActive] = useState<boolean>(true);
+
+  const navigation = useNavigation<StackNavigationProp<ParentRouteList>>();
 
   const handleBlur = () => {
     if (ref && ref.current) {
@@ -74,9 +77,10 @@ const OtpScreen: React.FC<UnAuthenticatedNavProps<'OtpScreen'>> = ({
           textContentType="oneTimeCode"
           value={digit}
           cursorColor="transparent"
-          activeColor={Colors.textPrimary}
+          activeColor={Colors.white}
           isActive={isActive && isInputActive}
           editable={false}
+          strokeWidth={2}
         />
       </TouchableOpacity>
     );
@@ -127,7 +131,7 @@ const OtpScreen: React.FC<UnAuthenticatedNavProps<'OtpScreen'>> = ({
             fontSize={18}
             btnStyle={styles.btn}
             onPress={() => {
-              navigation.navigate('OtpScreen');
+              navigation.navigate('Authenticated');
             }}>
             Submit
           </AppButton>

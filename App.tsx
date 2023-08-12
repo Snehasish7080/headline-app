@@ -6,26 +6,11 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import UnAuthenticatedNavigation from './src/navigation/UnAuthenticatedNavigation/UnAuthenticatedNavigation';
 import {NavigationContainer} from '@react-navigation/native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import ParentNavigation from './src/navigation/ParentNavigation/ParentNavigation';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -41,7 +26,9 @@ function App(): JSX.Element {
           barStyle={isDarkMode ? 'light-content' : 'dark-content'}
           backgroundColor={backgroundStyle.backgroundColor}
         />
-        <UnAuthenticatedNavigation />
+        <>
+          <ParentNavigation />
+        </>
       </SafeAreaView>
     </NavigationContainer>
   );
