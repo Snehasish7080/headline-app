@@ -1,19 +1,31 @@
-import {View, Text, useWindowDimensions} from 'react-native';
-import React from 'react';
+import {View, Text, useWindowDimensions, Image} from 'react-native';
+import React, {useMemo} from 'react';
 import {AuthenticatedNavProps} from '../../navigation/AuthenticatedNavigation/AuthenticatedNavigationTypes';
 import AppBackground from '../../atoms/AppBackground/AppBackground';
 import {
+  BlendMode,
   Canvas,
   Group,
+  ImageSVG,
   Paint,
+  Path,
   RoundedRect,
   Shadow,
+  Skia,
 } from '@shopify/react-native-skia';
 import {Colors} from '../../utils/theme';
 import {styles} from './ProfileScreenStyles';
+import AppText from '../../atoms/AppText/AppText';
+import AppOutlinedButton from '../../atoms/AppOutlinedButton/AppOutlinedButton';
+import {messageIcon} from '../../assets/icons/icons';
 
 const ProfileScreen: React.FC<AuthenticatedNavProps<'ProfileScreen'>> = () => {
   const {width} = useWindowDimensions();
+
+  const paint = useMemo(() => Skia.Paint(), []);
+  paint.setColorFilter(
+    Skia.ColorFilter.MakeBlend(Skia.Color(Colors.textPrimary), BlendMode.SrcIn),
+  );
   return (
     <AppBackground style={{flex: 1}}>
       <View style={styles.canvasContainer}>
@@ -40,7 +52,74 @@ const ProfileScreen: React.FC<AuthenticatedNavProps<'ProfileScreen'>> = () => {
             </RoundedRect>
           </Group>
         </Canvas>
-        <View style={styles.profileContainer}></View>
+        <View style={styles.profileContainer}>
+          <View style={styles.imageContainer}>
+            <Image
+              source={{
+                uri: 'https://images.unsplash.com/photo-1543132220-3ec99c6094dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80',
+              }}
+              style={styles.profilePic}
+            />
+            <View style={styles.connectionDetail}>
+              <View style={styles.connectionContainer}>
+                <View style={styles.connection}>
+                  <AppText lineHeight={16} style={styles.connectionCount}>
+                    7.4M
+                  </AppText>
+                  <AppText lineHeight={12} style={styles.connectionTitle}>
+                    Followers
+                  </AppText>
+                </View>
+                <View
+                  style={[
+                    styles.connection,
+                    {
+                      marginLeft: 16,
+                    },
+                  ]}>
+                  <AppText lineHeight={16} style={styles.connectionCount}>
+                    117
+                  </AppText>
+                  <AppText lineHeight={12} style={styles.connectionTitle}>
+                    Following
+                  </AppText>
+                </View>
+              </View>
+              <View style={styles.buttonContainer}>
+                <AppOutlinedButton
+                  textLineHeight={14}
+                  textStyle={styles.btnText}
+                  style={styles.btn}>
+                  Follow
+                </AppOutlinedButton>
+                <AppOutlinedButton
+                  textLineHeight={12}
+                  textStyle={styles.btnText}
+                  style={[styles.btn, {flex: 0}]}>
+                  <Canvas style={{width: 18, height: '100%'}}>
+                    <Group layer={paint}>
+                      <ImageSVG svg={messageIcon} x={2} y={3} />
+                    </Group>
+                  </Canvas>
+                </AppOutlinedButton>
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.nameContainer}>
+            <AppText lineHeight={18} style={styles.name}>
+              Saba
+            </AppText>
+            <AppText lineHeight={14} style={styles.desc}>
+              Band / Musician
+            </AppText>
+            <AppText lineHeight={12} style={styles.about}>
+              PIVOTGANG 🏀 {`\n`}CARE FOR ME TOUR OUT NOW 🎙 {`\n`}#CHI-TOWN{' '}
+              {`\n`}This remind me of before we had insomnia Sleepin'
+              peacefully, never needed a pile of drugs
+            </AppText>
+          </View>
+        </View>
       </View>
     </AppBackground>
   );

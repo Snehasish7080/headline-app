@@ -11,11 +11,73 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   profileContainer: {
-    borderWidth: 1,
     height: 270,
     position: 'absolute',
     width: '75%',
     top: 55,
     borderRadius: 30,
+    padding: 16,
+  },
+  profilePic: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+  },
+  imageContainer: {
+    flexDirection: 'row',
+  },
+  connectionContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  connection: {
+    alignItems: 'center',
+  },
+  connectionCount: {
+    fontSize: 16,
+    fontFamily: FontFamily.LatoBold,
+  },
+  connectionTitle: {
+    fontSize: 12,
+    fontFamily: FontFamily.LatoRegular,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    paddingHorizontal: 16,
+    marginTop: 8,
+  },
+  btnText: {
+    fontSize: 14,
+    fontFamily: FontFamily.LatoRegular,
+  },
+  connectionDetail: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  btn: {
+    flex: 1,
+    marginRight: 5,
+    height: 30,
+    paddingVertical: 2,
+  },
+  nameContainer: {
+    padding: 16,
+  },
+  name: {
+    fontSize: 18,
+    fontFamily: FontFamily.LatoBold,
+  },
+  desc: {
+    fontSize: 14,
+    fontFamily: FontFamily.LatoRegular,
+    opacity: 0.8,
+  },
+  about: {
+    fontSize: 12,
+    fontFamily: FontFamily.LatoRegular,
+    opacity: 0.8,
+    marginTop: 8,
   },
 });
