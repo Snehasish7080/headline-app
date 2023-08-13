@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   canvas: {width: '100%', height: '100%'},
   canvasContainer: {
     width: '100%',
-    height: 400,
+    height: 360,
     position: 'relative',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
   profileContainer: {
     height: 270,
     position: 'absolute',
-    width: '75%',
+    width: '82%',
     top: 55,
     borderRadius: 30,
     padding: 16,
@@ -79,5 +79,22 @@ export const styles = StyleSheet.create({
     fontFamily: FontFamily.LatoRegular,
     opacity: 0.8,
     marginTop: 8,
+  },
+  threadContainer: {
+    flexGrow: 1,
+    paddingHorizontal: 16,
+  },
+  threadTitleContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+  },
+  threadCount: {
+    fontFamily: FontFamily.LatoBold,
+    fontSize: 16,
+  },
+  threadTitle: {
+    fontSize: 16,
+    fontFamily: FontFamily.LatoRegular,
+    marginLeft: 5,
   },
 });
