@@ -11,7 +11,7 @@ import AppButton from '../../atoms/AppButton/AppButton';
 import {UnAuthenticatedNavProps} from '../../navigation/UnAuthenticatedNavigation/UnAuthenticatedNavigationTypes';
 import {horizontalScale} from '../../utils/scale';
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, StackActions} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {TextInput} from 'react-native-gesture-handler';
 import AppInputBox from '../../atoms/AppInputBox/AppInputBox';
@@ -131,7 +131,7 @@ const OtpScreen: React.FC<UnAuthenticatedNavProps<'OtpScreen'>> = () => {
             fontSize={18}
             btnStyle={styles.btn}
             onPress={() => {
-              navigation.navigate('Authenticated');
+              navigation.dispatch(StackActions.replace('Authenticated'));
             }}>
             Submit
           </AppButton>

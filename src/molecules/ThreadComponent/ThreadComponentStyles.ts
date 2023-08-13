@@ -30,8 +30,7 @@ export const styles = StyleSheet.create({
   actionContainer: {
     height: 30,
     position: 'absolute',
-    bottom: 0,
-    width: 100,
+    bottom: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
