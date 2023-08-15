@@ -29,12 +29,10 @@ export const styles = StyleSheet.create({
   },
   actionContainer: {
     height: 30,
-    position: 'absolute',
-    bottom: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    left: 20,
+    maxWidth: 180,
   },
   count: {
     fontSize: 12,
@@ -46,5 +44,36 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 25,
+  },
+  userContainer: {
+    position: 'absolute',
+    height: 30,
+    bottom: 20,
+    left: 20,
+    right: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  userName: {
+    fontSize: 12,
+    fontFamily: FontFamily.LatoBold,
+  },
+  threadContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  threads: {
+    fontSize: 12,
+    fontFamily: FontFamily.LatoRegular,
+    marginLeft: 10,
+    maxWidth: 120,
+  },
+  threadOuterContainer: {
+    borderColor: 'red',
+    position: 'absolute',
+    bottom: 0,
+    left: 20,
+    right: 15,
   },
 });

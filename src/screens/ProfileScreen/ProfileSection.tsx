@@ -31,14 +31,14 @@ const ProfileSection = () => {
   );
   return (
     <>
-      <TouchableOpacity style={styles.settingContainer} activeOpacity={0.5}>
-        <Canvas style={{width: '100%', height: '100%'}}>
-          <Group layer={paint}>
-            <ImageSVG svg={settingIcon()} x={10} y={10} />
-          </Group>
-        </Canvas>
-      </TouchableOpacity>
       <View style={styles.canvasContainer}>
+        <TouchableOpacity style={styles.settingContainer} activeOpacity={0.5}>
+          <Canvas style={{width: '100%', height: '100%'}}>
+            <Group layer={paint}>
+              <ImageSVG svg={settingIcon(15, 15)} x={7.5} y={7.5} />
+            </Group>
+          </Canvas>
+        </TouchableOpacity>
         <Canvas style={styles.canvas}>
           <Group color={Colors.btnBackground}>
             <RoundedRect

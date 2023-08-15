@@ -3,7 +3,6 @@ import {Colors, FontFamily} from '../../utils/theme';
 
 export const styles = StyleSheet.create({
   container: {
-    paddingVertical: 50,
     backgroundColor: Colors.primary,
     position: 'absolute',
     bottom: 0,
@@ -11,20 +10,11 @@ export const styles = StyleSheet.create({
     right: 0,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    height: 300,
-    alignItems: 'center',
+    height: 400,
+    padding: 16,
   },
   mainContainer: {
     flex: 1,
-  },
-  btn: {width: '100%', height: 100},
-  title: {
-    fontFamily: FontFamily.LatoBold,
-    fontSize: 18,
-    color: Colors.textPrimary,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    paddingVertical: 20,
+    backgroundColor: 'rgba(0, 0, 0,0.8392)',
   },
 });

@@ -1,3 +1,5 @@
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 import {
   BlendMode,
   Canvas,
@@ -17,6 +19,7 @@ import {
   shareIcon,
 } from '../../assets/icons/icons';
 import AppText from '../../atoms/AppText/AppText';
+import {AuthenticatedRouteList} from '../../navigation/AuthenticatedNavigation/AuthenticatedNavigationTypes';
 import {Colors} from '../../utils/theme';
 import {styles} from './ThreadComponentStyles';
 
@@ -33,6 +36,9 @@ const ThreadComponent: React.FC<ThreadComponentProps> = ({
   const {width} = useWindowDimensions();
   const [height, setHeight] = useState(0);
   const [isLiked, setLsLiked] = useState(false);
+
+  const navigation =
+    useNavigation<StackNavigationProp<AuthenticatedRouteList>>();
 
   const handleLiked = () => {
     setLsLiked(!isLiked);
@@ -52,7 +58,7 @@ const ThreadComponent: React.FC<ThreadComponentProps> = ({
       style={[
         styles.canvasContainer,
         {
-          height: showText ? height + 70 : 230 + 20,
+          height: showText ? height + 80 : 230 + 30,
         },
       ]}>
       <Canvas style={[styles.canvas]}>
@@ -105,41 +111,63 @@ const ThreadComponent: React.FC<ThreadComponentProps> = ({
           {content}
         </AppText>
       )}
-      <View style={styles.actionContainer}>
-        <View style={styles.actions}>
-          <TouchableOpacity onPress={handleLiked}>
+      <View style={styles.userContainer}>
+        <View style={styles.actionContainer}>
+          <View style={styles.actions}>
+            <TouchableOpacity onPress={handleLiked}>
+              <Canvas style={{width: 22, height: '100%'}}>
+                <Group layer={isLiked ? filledPaint : paint}>
+                  <ImageSVG
+                    svg={isLiked ? heartFilledIcon(18, 21) : heartIcon(18, 21)}
+                    x={2}
+                    y={3}
+                  />
+                </Group>
+              </Canvas>
+            </TouchableOpacity>
+            <AppText lineHeight={12} style={styles.count}>
+              10K
+            </AppText>
+          </View>
+          <View style={styles.actions}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('ThreadScreen');
+              }}>
+              <Canvas style={{width: 22, height: '100%'}}>
+                <Group layer={paint}>
+                  <ImageSVG svg={commentIcon(18, 21)} x={2} y={3} />
+                </Group>
+              </Canvas>
+            </TouchableOpacity>
+            <AppText lineHeight={12} style={styles.count}>
+              1K
+            </AppText>
+          </View>
+          <View style={styles.actions}>
             <Canvas style={{width: 22, height: '100%'}}>
-              <Group layer={isLiked ? filledPaint : paint}>
-                <ImageSVG
-                  svg={isLiked ? heartFilledIcon(18, 21) : heartIcon(18, 21)}
-                  x={2}
-                  y={3}
-                />
+              <Group layer={paint}>
+                <ImageSVG svg={shareIcon(18, 21)} x={2} y={3} />
               </Group>
             </Canvas>
-          </TouchableOpacity>
-          <AppText lineHeight={12} style={styles.count}>
-            10K
+            <AppText lineHeight={12} style={styles.count}>
+              5K
+            </AppText>
+          </View>
+        </View>
+        <View>
+          <AppText lineHeight={12} style={styles.userName}>
+            @Jacques Webster
           </AppText>
         </View>
-        <View style={styles.actions}>
-          <Canvas style={{width: 22, height: '100%'}}>
-            <Group layer={paint}>
-              <ImageSVG svg={commentIcon(18, 21)} x={2} y={3} />
-            </Group>
-          </Canvas>
-          <AppText lineHeight={12} style={styles.count}>
-            1K
+      </View>
+      <View style={styles.threadOuterContainer}>
+        <View style={styles.threadContainer}>
+          <AppText lineHeight={12} style={styles.userName}>
+            @Soba
           </AppText>
-        </View>
-        <View style={styles.actions}>
-          <Canvas style={{width: 22, height: '100%'}}>
-            <Group layer={paint}>
-              <ImageSVG svg={shareIcon(18, 21)} x={2} y={3} />
-            </Group>
-          </Canvas>
-          <AppText lineHeight={12} style={styles.count}>
-            5K
+          <AppText lineHeight={12} style={styles.threads} numberOfLines={1}>
+            We absolutely need to get
           </AppText>
         </View>
       </View>

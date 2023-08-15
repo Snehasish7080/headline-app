@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
     top: 25,
     borderRadius: 30,
     padding: 16,
+    paddingTop: 30,
   },
   profilePic: {
     width: 80,
@@ -98,13 +99,17 @@ export const styles = StyleSheet.create({
     marginLeft: 5,
   },
   settingContainer: {
-    height: 40,
-    width: 40,
+    height: 30,
+    width: 30,
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.white,
     alignSelf: 'flex-end',
     marginTop: 16,
+    position: 'absolute',
+    zIndex: 1,
+    right: 40,
+    top: 15,
   },
 });

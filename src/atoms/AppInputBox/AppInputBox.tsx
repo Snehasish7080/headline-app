@@ -59,11 +59,11 @@ const AppInputBox: React.FC<AppInputBoxProps> = ({
             color={Colors.btnBackground}>
             <Paint color={Colors.primary} style="stroke" strokeWidth={1} />
 
-            <Shadow dx={-3} dy={-3} blur={7} color="#FFFFFF" inner />
+            <Shadow dx={-2} dy={-2} blur={4} color="#FFFFFF" inner />
             <Shadow
               dx={2}
               dy={2}
-              blur={5}
+              blur={4}
               color="rgba(136, 165, 191, 0.38)"
               inner
             />
