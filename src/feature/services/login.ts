@@ -5,12 +5,12 @@ type loginBody = {
 };
 
 export const authApi = createApi({
-  baseQuery: fetchBaseQuery({baseUrl: 'localhost:3000/auth/'}),
+  baseQuery: fetchBaseQuery({baseUrl: 'http://127.0.0.1:3000/auth'}),
   tagTypes: ['Auth'],
   endpoints: build => ({
     login: build.mutation<loginBody, loginBody>({
       query: body => ({
-        url: 'login',
+        url: '/login',
         method: 'Post',
         body,
       }),

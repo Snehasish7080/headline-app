@@ -1,5 +1,5 @@
 import {Canvas, Text, useFont} from '@shopify/react-native-skia';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Dimensions,
   KeyboardAvoidingView,
@@ -11,6 +11,7 @@ import AppBackground from '../../atoms/AppBackground/AppBackground';
 import AppButton from '../../atoms/AppButton/AppButton';
 import AppInputBox from '../../atoms/AppInputBox/AppInputBox';
 import AppText from '../../atoms/AppText/AppText';
+import {useLoginMutation} from '../../feature/services/login';
 import {UnAuthenticatedNavProps} from '../../navigation/UnAuthenticatedNavigation/UnAuthenticatedNavigationTypes';
 import {horizontalScale} from '../../utils/scale';
 import {Colors, FontFamily} from '../../utils/theme';
@@ -24,6 +25,13 @@ const LandingScreen: React.FC<UnAuthenticatedNavProps<'LandingScreen'>> = ({
     require('../../assets/fonts/Lato-Regular.ttf'),
     fontSize,
   );
+
+  const [mobile, setMobile] = useState<string>('');
+
+  const [login, result] = useLoginMutation();
+
+  console.log('result', result.data);
+
   return (
     <AppBackground style={styles.container}>
       <KeyboardAvoidingView style={{flex: 1}}>
@@ -60,6 +68,8 @@ const LandingScreen: React.FC<UnAuthenticatedNavProps<'LandingScreen'>> = ({
             keyboardType="phone-pad"
             textAlign="center"
             maxLength={10}
+            value={mobile}
+            onChangeText={text => setMobile(text)}
           />
         </View>
 
@@ -71,7 +81,10 @@ const LandingScreen: React.FC<UnAuthenticatedNavProps<'LandingScreen'>> = ({
           fontSize={18}
           btnStyle={styles.btn}
           onPress={() => {
-            navigation.navigate('OtpScreen');
+            // navigation.navigate('OtpScreen');
+            return login({
+              mobile: mobile,
+            });
           }}>
           Sign in
         </AppButton>
