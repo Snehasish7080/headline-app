@@ -30,8 +30,6 @@ const LandingScreen: React.FC<UnAuthenticatedNavProps<'LandingScreen'>> = ({
 
   const [login, result] = useLoginMutation();
 
-  console.log('result', result.data);
-
   return (
     <AppBackground style={styles.container}>
       <KeyboardAvoidingView style={{flex: 1}}>
