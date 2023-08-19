@@ -1,20 +1,11 @@
-import {Canvas, Text, useFont} from '@shopify/react-native-skia';
-import React, {useState} from 'react';
-import {
-  Dimensions,
-  KeyboardAvoidingView,
-  View,
-  Image,
-  ScrollView,
-} from 'react-native';
+import {useFont} from '@shopify/react-native-skia';
+import React from 'react';
+import {Image, KeyboardAvoidingView, View} from 'react-native';
 import AppBackground from '../../atoms/AppBackground/AppBackground';
 import AppButton from '../../atoms/AppButton/AppButton';
-import AppInputBox from '../../atoms/AppInputBox/AppInputBox';
 import AppText from '../../atoms/AppText/AppText';
-import {useLoginMutation} from '../../feature/services/login';
 import {UnAuthenticatedNavProps} from '../../navigation/UnAuthenticatedNavigation/UnAuthenticatedNavigationTypes';
 import {horizontalScale} from '../../utils/scale';
-import {Colors, FontFamily} from '../../utils/theme';
 import {styles} from './LandingScreenStyles';
 
 const LandingScreen: React.FC<UnAuthenticatedNavProps<'LandingScreen'>> = ({
@@ -25,10 +16,6 @@ const LandingScreen: React.FC<UnAuthenticatedNavProps<'LandingScreen'>> = ({
     require('../../assets/fonts/Lato-Regular.ttf'),
     fontSize,
   );
-
-  const [mobile, setMobile] = useState<string>('');
-
-  const [login, result] = useLoginMutation();
 
   return (
     <AppBackground style={styles.container}>
@@ -58,37 +45,32 @@ const LandingScreen: React.FC<UnAuthenticatedNavProps<'LandingScreen'>> = ({
           Welcome back {`\n`}to Headline
         </AppText>
 
-        <View style={styles.inputContainer}>
-          <AppInputBox
+        <View style={styles.btnContainer}>
+          <AppButton
             width={horizontalScale(327)}
-            height={58}
-            label="Mobile"
-            keyboardType="phone-pad"
-            textAlign="center"
-            maxLength={10}
-            value={mobile}
-            onChangeText={text => setMobile(text)}
-          />
+            height={60}
+            x={24}
+            y={15}
+            fontSize={18}
+            btnStyle={styles.btn}
+            onPress={() => {
+              navigation.navigate('OtpScreen');
+            }}>
+            Create Account
+          </AppButton>
+          <AppButton
+            width={horizontalScale(327)}
+            height={60}
+            x={24}
+            y={15}
+            fontSize={18}
+            btnStyle={styles.btn}
+            onPress={() => {
+              navigation.navigate('LoginScreen');
+            }}>
+            Sign in
+          </AppButton>
         </View>
-
-        <AppButton
-          width={horizontalScale(327)}
-          height={60}
-          x={24}
-          y={15}
-          fontSize={18}
-          btnStyle={styles.btn}
-          onPress={() => {
-            // navigation.navigate('OtpScreen');
-            return login({
-              mobile: mobile,
-            });
-          }}>
-          Sign in
-        </AppButton>
-        <AppText lineHeight={12} style={styles.notRegisteredText}>
-          Not Registered? Sign Up
-        </AppText>
       </KeyboardAvoidingView>
     </AppBackground>
   );

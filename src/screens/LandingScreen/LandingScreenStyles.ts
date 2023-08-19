@@ -19,11 +19,7 @@ export const styles = StyleSheet.create({
     opacity: 0.6,
   },
   btn: {width: '100%', height: 100},
-  inputContainer: {
-    paddingHorizontal: 24,
-    paddingVertical: 34,
-    justifyContent: 'flex-end',
-  },
+
   imageContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -46,10 +42,8 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     resizeMode: 'contain',
   },
-  notRegisteredText: {
-    fontSize: 12,
-    color: Colors.textPrimary,
-    fontFamily: FontFamily.LatoRegular,
-    textAlign: 'center',
+
+  btnContainer: {
+    marginTop: 100,
   },
 });

@@ -5,6 +5,7 @@ export const Colors = {
   labelText: '#334669',
   white: '#FFFFFF',
   heart: 'rgba(255, 86, 94, 0.9)',
+  error: '#CC002E',
 };
 
 export const FontFamily = {

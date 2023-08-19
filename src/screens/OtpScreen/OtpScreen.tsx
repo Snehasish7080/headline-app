@@ -1,4 +1,3 @@
-import {BackdropBlur, Canvas, Fill, Rect} from '@shopify/react-native-skia';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Keyboard,
@@ -11,18 +10,16 @@ import AppButton from '../../atoms/AppButton/AppButton';
 import {UnAuthenticatedNavProps} from '../../navigation/UnAuthenticatedNavigation/UnAuthenticatedNavigationTypes';
 import {horizontalScale} from '../../utils/scale';
 
-import {useNavigation, StackActions} from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {TextInput} from 'react-native-gesture-handler';
 import AppInputBox from '../../atoms/AppInputBox/AppInputBox';
 import AppText from '../../atoms/AppText/AppText';
-import {AuthenticatedRouteList} from '../../navigation/AuthenticatedNavigation/AuthenticatedNavigationTypes';
+import {ParentRouteList} from '../../navigation/ParentNavigation/ParentNavigationTypes';
 import {Colors} from '../../utils/theme';
 import {styles} from './OtpScreenStyles';
-import {ParentRouteList} from '../../navigation/ParentNavigation/ParentNavigationTypes';
 
 const OtpScreen: React.FC<UnAuthenticatedNavProps<'OtpScreen'>> = () => {
-  const {width, height} = useWindowDimensions();
   const ref = useRef<TextInput>(null);
   const [otp, setOtp] = useState('');
   const [isActive, setActive] = useState<boolean>(true);
@@ -88,20 +85,6 @@ const OtpScreen: React.FC<UnAuthenticatedNavProps<'OtpScreen'>> = () => {
   return (
     <View style={styles.mainContainer}>
       <KeyboardAvoidingView style={{flex: 1}}>
-        <Canvas style={{height: height}}>
-          <Rect
-            x={0}
-            y={0}
-            width={width}
-            height={height}
-            color="rgba(221, 231, 243,0.5392)"
-          />
-          <BackdropBlur
-            blur={4}
-            clip={{x: 0, y: 0, width: width, height: height}}>
-            <Fill color="rgba(0, 0, 0, 0.1)" />
-          </BackdropBlur>
-        </Canvas>
         <View style={styles.container}>
           <AppText lineHeight={18} style={styles.title}>
             Verify OTP

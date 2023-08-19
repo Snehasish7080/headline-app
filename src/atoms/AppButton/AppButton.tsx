@@ -1,18 +1,22 @@
 import {
   Canvas,
   Group,
+  Paint,
   RoundedRect,
   Shadow,
   Text,
   useFont,
-  CanvasProps,
-  Paint,
 } from '@shopify/react-native-skia';
 import React from 'react';
-import {Pressable, PressableProps, View, ViewStyle} from 'react-native';
+import {
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+  ViewStyle,
+} from 'react-native';
 import {Colors} from '../../utils/theme';
 
-type AppButtonProps = PressableProps & {
+type AppButtonProps = TouchableOpacityProps & {
   width: number;
   height: number;
   x: number;
@@ -46,7 +50,7 @@ const AppButton: React.FC<AppButtonProps> = ({
           position: 'relative',
         },
       ]}>
-      <Pressable
+      <TouchableOpacity
         style={{
           width: width,
           height: height,
