@@ -23,6 +23,8 @@ type AppButtonProps = TouchableOpacityProps & {
   y: number;
   fontSize?: number;
   children?: string;
+  btnColor?: string;
+  txtColor?: string;
   btnStyle?: ViewStyle;
 };
 const AppButton: React.FC<AppButtonProps> = ({
@@ -33,6 +35,8 @@ const AppButton: React.FC<AppButtonProps> = ({
   fontSize = 18,
   children,
   btnStyle,
+  btnColor,
+  txtColor,
   ...props
 }) => {
   const font = useFont(
@@ -62,10 +66,14 @@ const AppButton: React.FC<AppButtonProps> = ({
         {...props}
       />
       <Canvas style={{height: '100%', width: '100%'}}>
-        <Group color={Colors.btnBackground}>
+        <Group color={Boolean(btnColor) ? btnColor : Colors.btnBackground}>
           <RoundedRect x={x} y={y} width={width} height={height} r={16}>
             <Paint
-              color={'rgba(136, 165, 191, 0.04)'}
+              color={
+                Boolean(btnColor)
+                  ? Colors.btnBackground
+                  : 'rgba(136, 165, 191, 0.04)'
+              }
               style="stroke"
               strokeWidth={1}
             />
@@ -77,7 +85,7 @@ const AppButton: React.FC<AppButtonProps> = ({
             y={height / 1.6 + y}
             text={children || ''}
             font={font}
-            color={Colors.textPrimary}
+            color={Boolean(txtColor) ? txtColor : Colors.textPrimary}
           />
         </Group>
       </Canvas>

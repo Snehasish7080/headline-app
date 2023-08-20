@@ -1,5 +1,5 @@
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
-import {authApi} from './services/login';
+import {configureStore} from '@reduxjs/toolkit';
+import {authApi} from './services/auth';
 import userSlice from './slice/userSlice';
 
 export const store = configureStore({

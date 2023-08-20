@@ -4,27 +4,30 @@ import {Controller, ControllerProps, FieldValues} from 'react-hook-form';
 import AppText from '../AppText/AppText';
 import {Colors, FontFamily} from '../../utils/theme';
 
-const AppController: React.FC<ControllerProps<FieldValues, any>> = ({
+type AppControllerProps<T extends FieldValues> = ControllerProps<T, any> & {
+  error?: string;
+};
+const AppController = <T extends FieldValues>({
+  error,
   ...props
-}) => {
+}: AppControllerProps<T>) => {
   return (
-    <View
-      style={{
-        width: '100%',
-      }}>
+    <>
       <Controller {...props} />
-      <AppText
-        lineHeight={12}
-        style={{
-          color: Colors.error,
-          fontFamily: FontFamily.LatoRegular,
-          fontSize: 12,
-          marginTop: 5,
-          borderWidth: 1,
-        }}>
-        This is required.
-      </AppText>
-    </View>
+      {Boolean(error) && (
+        <AppText
+          lineHeight={12}
+          style={{
+            color: Colors.error,
+            fontFamily: FontFamily.LatoRegular,
+            fontSize: 12,
+            marginTop: 10,
+            paddingHorizontal: 5,
+          }}>
+          {error}
+        </AppText>
+      )}
+    </>
   );
 };
 

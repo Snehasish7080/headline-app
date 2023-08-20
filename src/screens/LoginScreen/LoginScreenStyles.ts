@@ -18,10 +18,9 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0,0.8392)',
   },
   inputContainer: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
     marginBottom: 30,
     marginTop: 25,
+    paddingHorizontal: 24,
   },
   btn: {width: '100%', height: 100},
   loginTitle: {

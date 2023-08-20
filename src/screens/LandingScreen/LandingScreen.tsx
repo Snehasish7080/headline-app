@@ -6,6 +6,7 @@ import AppButton from '../../atoms/AppButton/AppButton';
 import AppText from '../../atoms/AppText/AppText';
 import {UnAuthenticatedNavProps} from '../../navigation/UnAuthenticatedNavigation/UnAuthenticatedNavigationTypes';
 import {horizontalScale} from '../../utils/scale';
+import {Colors} from '../../utils/theme';
 import {styles} from './LandingScreenStyles';
 
 const LandingScreen: React.FC<UnAuthenticatedNavProps<'LandingScreen'>> = ({
@@ -53,9 +54,10 @@ const LandingScreen: React.FC<UnAuthenticatedNavProps<'LandingScreen'>> = ({
             y={15}
             fontSize={18}
             btnStyle={styles.btn}
-            onPress={() => {
-              navigation.navigate('OtpScreen');
-            }}>
+            // onPress={() => {
+            //   navigation.navigate('OtpScreen');
+            // }}
+          >
             Create Account
           </AppButton>
           <AppButton
@@ -67,7 +69,10 @@ const LandingScreen: React.FC<UnAuthenticatedNavProps<'LandingScreen'>> = ({
             btnStyle={styles.btn}
             onPress={() => {
               navigation.navigate('LoginScreen');
-            }}>
+            }}
+            // btnColor={Colors.textPrimary}
+            // txtColor={Colors.white}
+          >
             Sign in
           </AppButton>
         </View>

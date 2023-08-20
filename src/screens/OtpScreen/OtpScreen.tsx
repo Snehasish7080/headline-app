@@ -18,13 +18,72 @@ import AppText from '../../atoms/AppText/AppText';
 import {ParentRouteList} from '../../navigation/ParentNavigation/ParentNavigationTypes';
 import {Colors} from '../../utils/theme';
 import {styles} from './OtpScreenStyles';
+import {useForm} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import AppController from '../../atoms/AppController/AppController';
+import {useVerifyMutation} from '../../feature/services/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const OtpScreen: React.FC<UnAuthenticatedNavProps<'OtpScreen'>> = () => {
+type VerifyData = {
+  otp: string;
+};
+
+const schema = yup
+  .object({
+    otp: yup.string().required('OTP is required').length(4, 'invalid mobile'),
+  })
+  .required();
+
+const OtpScreen: React.FC<UnAuthenticatedNavProps<'OtpScreen'>> = ({
+  navigation,
+  route,
+}) => {
+  const {token} = route.params;
   const ref = useRef<TextInput>(null);
-  const [otp, setOtp] = useState('');
   const [isActive, setActive] = useState<boolean>(true);
+  const [verify] = useVerifyMutation();
+  const stackNavigation = useNavigation<StackNavigationProp<ParentRouteList>>();
 
-  const navigation = useNavigation<StackNavigationProp<ParentRouteList>>();
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+    watch,
+  } = useForm<VerifyData>({
+    defaultValues: {
+      otp: '',
+    },
+    resolver: yupResolver(schema),
+  });
+  const otp = watch('otp');
+
+  const onSubmit = (data: VerifyData) => {
+    if (token) {
+      try {
+        verify({
+          otp: data?.otp,
+          token: token,
+        })
+          .unwrap()
+          .then(res => {
+            if (res.success) {
+              saveToken(res.token);
+              navigation.pop();
+              navigation.dispatch(StackActions.replace('Authenticated'));
+            }
+          });
+      } catch (error) {}
+    }
+  };
+
+  const saveToken = async (token: string) => {
+    try {
+      await AsyncStorage.setItem('authToken', token);
+    } catch (e) {
+      console.log('error', e);
+    }
+  };
 
   const handleBlur = () => {
     if (ref && ref.current) {
@@ -92,20 +151,45 @@ const OtpScreen: React.FC<UnAuthenticatedNavProps<'OtpScreen'>> = () => {
           <View style={styles.inputContainer}>
             {Array(4).fill(0).map(otpInput)}
           </View>
-          <TextInput
-            ref={ref}
-            maxLength={4}
-            onChangeText={text => setOtp(text)}
-            keyboardType="number-pad"
-            returnKeyType="done"
-            textContentType="oneTimeCode"
-            onBlur={handleBlur}
-            autoFocus={true}
-            style={{
-              opacity: 0,
-              height: 0,
+          <AppController
+            control={control}
+            rules={{
+              required: true,
             }}
+            render={({field: {onChange, onBlur, value}}) => (
+              // <AppInputBox
+              //   width={horizontalScale(327)}
+              //   height={58}
+              //   label="Mobile"
+              //   keyboardType="phone-pad"
+              //   textAlign="center"
+              //   maxLength={10}
+              //   onChangeText={onChange}
+              //   value={value}
+              //   onBlur={onBlur}
+              // />
+              <TextInput
+                ref={ref}
+                maxLength={4}
+                onChangeText={onChange}
+                keyboardType="number-pad"
+                returnKeyType="done"
+                textContentType="oneTimeCode"
+                onBlur={() => {
+                  handleBlur();
+                  onBlur();
+                }}
+                autoFocus={true}
+                style={{
+                  opacity: 0,
+                  height: 0,
+                }}
+              />
+            )}
+            name="otp"
+            error={errors?.otp?.message}
           />
+
           <AppButton
             width={horizontalScale(327)}
             height={60}
@@ -113,8 +197,11 @@ const OtpScreen: React.FC<UnAuthenticatedNavProps<'OtpScreen'>> = () => {
             y={15}
             fontSize={18}
             btnStyle={styles.btn}
+            // onPress={() => {
+            //   navigation.dispatch(StackActions.replace('Authenticated'));
+            // }}
             onPress={() => {
-              navigation.dispatch(StackActions.replace('Authenticated'));
+              handleSubmit(onSubmit)();
             }}>
             Submit
           </AppButton>

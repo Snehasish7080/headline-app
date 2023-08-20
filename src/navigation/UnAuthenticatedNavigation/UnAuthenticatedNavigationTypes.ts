@@ -2,7 +2,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 
 export type UnAuthenticatedRouteList = {
   LandingScreen: undefined;
-  OtpScreen: undefined;
+  OtpScreen: {token: string};
   LoginScreen: undefined;
 };
 export type UnAuthenticatedNavigationProp<
